@@ -6,12 +6,6 @@ export const Input = forwardRef(({ id, label, unit, ...rest }, ref) => {
       <label htmlFor={id}>{label}</label>
       <input className="input-controls" id={id} ref={ref} {...rest} />
       {unit && <span>{unit}</span>}
-
-      {/* <select>
-        <option>px</option>
-        <option>rem</option>
-        <option>%</option>
-      </select> */}
     </>
   );
 });

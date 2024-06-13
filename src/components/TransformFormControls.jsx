@@ -1,7 +1,7 @@
 import { useState, useRef, useEffect } from "react";
 import { Input } from "./Input";
 import { UnitControls } from "./UnitControls";
-import { transform } from "typescript";
+import { useAudio } from "./hooks/useAudio";
 
 const defaultTransformUnits = {
   transform: "px",
@@ -21,6 +21,8 @@ export const TransformFormControls = ({
   const xTransformOriginRef = useRef(null);
   const yTransformOriginRef = useRef(null);
   const [transformUnits, setTransformUnits] = useState(defaultTransformUnits);
+
+  const { audioRef, audioSetting, setAudioSetting } = useAudio();
 
   useEffect(() => {
     window.addEventListener("keyup", handleKeyUpForReset);
@@ -69,6 +71,11 @@ export const TransformFormControls = ({
       },
       transformUnits
     );
+
+    if (audioSetting) {
+      audioRef.current.pause();
+      audioRef.current.play();
+    }
   };
 
   const handleFormReset = () => {
@@ -88,6 +95,11 @@ export const TransformFormControls = ({
     );
 
     setTransformUnits(defaultTransformUnits);
+
+    if (audioSetting) {
+      audioRef.current.pause();
+      audioRef.current.play();
+    }
   };
 
   const handleLocateXYClick = () => {
@@ -120,6 +132,11 @@ export const TransformFormControls = ({
         [identifer]: value,
       }
     );
+
+    if (audioSetting) {
+      audioRef.current.pause();
+      audioRef.current.play();
+    }
   };
 
   return (
@@ -131,6 +148,22 @@ export const TransformFormControls = ({
     >
       <fieldset className="translate-controls-form-fieldset">
         <legend>Transform controls</legend>
+
+        <div className="audio-control">
+          <label
+            htmlFor="switch-audio"
+            className="custom-checkmark-label audio-label"
+          >
+            <span>Audio</span>
+            <input
+              type="checkbox"
+              id="switch-audio"
+              checked={audioSetting}
+              onClick={() => setAudioSetting((prev) => !prev)}
+            />
+            <span className="custom-checkmark">&nbsp;</span>
+          </label>
+        </div>
 
         <div className="translate-controls">
           <div className="transform-units-container">
@@ -243,6 +276,17 @@ export const TransformFormControls = ({
           Reset
         </button>
       </div>
+      {audioSetting && (
+        <audio
+          controls
+          className="transfomers-audio"
+          ref={audioRef}
+          volume={0.5}
+        >
+          <source src="/transformation-3-100340.mp3" type="audio/mpeg" />
+          Your browser does not support the audio tag.
+        </audio>
+      )}
     </form>
   );
 };

@@ -2,6 +2,7 @@ import "./styles.css";
 import { useState } from "react";
 import { TransformFormControls } from "./components/TransformFormControls";
 import { TranslateView } from "./components/TranslateView";
+import { useMediaQuery } from "./components/hooks/useMediaQuery";
 
 export default function App() {
   const [xyLocationCords, setXYLocationCords] = useState({ x: 0, y: 0 });
@@ -10,6 +11,10 @@ export default function App() {
   const [controlBoxAngleReferenceStyle, setControlBoxAngleReferenceStyle] =
     useState({});
   const [showXYCords, setShowXYCords] = useState(false);
+
+  const { windowSize } = useMediaQuery();
+
+  console.log("window size", windowSize);
 
   const xyLocationCordsStyle = {
     left: `${xyLocationCords.x - 6}px`,
@@ -46,6 +51,19 @@ export default function App() {
       setShowSpinner(false);
     }, 700);
   };
+
+  if (windowSize < 1000) {
+    return (
+      <div className="responsive-container">
+        <h1 className="responsive-title">Transform Playground</h1>
+        <div className="responsive-background">
+          <span className="info-text">
+            Open in desktop for best learning experience.
+          </span>
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="App">
