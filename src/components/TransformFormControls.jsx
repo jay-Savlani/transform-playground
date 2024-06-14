@@ -73,7 +73,6 @@ export const TransformFormControls = ({
     );
 
     if (audioSetting) {
-      audioRef.current.pause();
       audioRef.current.play();
     }
   };
@@ -97,7 +96,6 @@ export const TransformFormControls = ({
     setTransformUnits(defaultTransformUnits);
 
     if (audioSetting) {
-      audioRef.current.pause();
       audioRef.current.play();
     }
   };
@@ -134,7 +132,6 @@ export const TransformFormControls = ({
     );
 
     if (audioSetting) {
-      audioRef.current.pause();
       audioRef.current.play();
     }
   };
