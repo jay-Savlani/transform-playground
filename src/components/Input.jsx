@@ -5,7 +5,7 @@ export const Input = forwardRef(({ id, label, unit, ...rest }, ref) => {
     <>
       <label htmlFor={id}>{label}</label>
       <input className="input-controls" id={id} ref={ref} {...rest} />
-      {unit && <span>{unit}</span>}
+      {unit && <span className="unit">{unit}</span>}
     </>
   );
 });

@@ -22,15 +22,17 @@ export default function App() {
   };
 
   const handleApply = (transformValues, transformUnits) => {
-    const { x, y, rotate, originX, originY } = transformValues;
+    const { x, y, skeyX, skeyY, rotate, originX, originY } = transformValues;
 
     const { transform: transformUnit, transformOrigin: transformOriginUnit } =
       transformUnits;
 
     setShowSpinner(true);
 
+    console.log("skew values", skeyX, skeyY);
+
     setControlBoxStyle({
-      transform: `translate(${x}${transformUnit}, ${y}${transformUnit}) rotate(${rotate}deg)`,
+      transform: `translate(${x}${transformUnit}, ${y}${transformUnit}) rotate(${rotate}deg) skew(${skeyX}deg, ${skeyY}deg)`,
       transformOrigin: `${
         (originX && `${originX}${transformOriginUnit}`) || "50%"
       } ${(originY && `${originY}${transformOriginUnit}`) || "50%"}`,

@@ -37,6 +37,14 @@ export const Info = () => {
           Press <strong>Esc</strong> to reset form.
         </span>
       </li>
+      <li className="info-item">
+        <div className="info-symbol">
+          <InfoSvg />
+        </div>
+        <span className="info-content">
+          Press <strong>M</strong> to toggle audio.
+        </span>
+      </li>
     </ul>
   );
 };

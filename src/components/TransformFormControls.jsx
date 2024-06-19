@@ -20,11 +20,15 @@ export const TransformFormControls = ({
   const rotateRef = useRef(null);
   const xTransformOriginRef = useRef(null);
   const yTransformOriginRef = useRef(null);
+  const skeyXRef = useRef(null);
+  const skeyYRef = useRef(null);
   const [transformUnits, setTransformUnits] = useState(defaultTransformUnits);
 
   const { audioRef, audioSetting, setAudioSetting } = useAudio();
 
   useEffect(() => {
+    xRef.current.focus();
+
     window.addEventListener("keyup", handleKeyUpForReset);
 
     return () => {
@@ -50,6 +54,14 @@ export const TransformFormControls = ({
     if (typeof code === "number" && code === 27) {
       formRef?.current?.reset();
     }
+
+    if (typeof code === "string" && code === "m") {
+      setAudioSetting((prev) => !prev);
+    }
+
+    if (typeof code === "number" && code === 77) {
+      setAudioSetting((prev) => !prev);
+    }
   };
 
   const handleFormSubmit = (e) => {
@@ -65,6 +77,8 @@ export const TransformFormControls = ({
       {
         x: xRef.current.value || 0,
         y: yRef.current.value || 0,
+        skeyX: skeyXRef.current.value || 0,
+        skeyY: skeyYRef.current.value || 0,
         rotate: rotateRef.current.value || 0,
         originX: xTransformOriginRef.current.value,
         originY: yTransformOriginRef.current.value,
@@ -86,6 +100,8 @@ export const TransformFormControls = ({
       {
         x: 0,
         y: 0,
+        skeyX: 0,
+        skeyY: 0,
         rotate: 0,
         originX: "",
         originY: "",
@@ -122,6 +138,8 @@ export const TransformFormControls = ({
         x: xRef.current.value || 0,
         y: yRef.current.value || 0,
         rotate: rotateRef.current.value || 0,
+        skeyX: skeyXRef.current.value || 0,
+        skeyY: skeyYRef.current.value || 0,
         originX: xTransformOriginRef.current.value,
         originY: yTransformOriginRef.current.value,
       },
@@ -190,7 +208,7 @@ export const TransformFormControls = ({
               label="X"
               unit={transformUnits.transform}
               id="x-control"
-              type="text"
+              type="number"
               name="x"
               placeholder="0"
             />
@@ -202,7 +220,7 @@ export const TransformFormControls = ({
               label="Y"
               unit={transformUnits.transform}
               id="y-control"
-              type="text"
+              type="number"
               name="y"
               placeholder="0"
             />
@@ -216,6 +234,30 @@ export const TransformFormControls = ({
               id="rotate"
               type="number"
               name="rotate"
+              placeholder="0"
+            />
+          </div>
+
+          <div className="input-control-group">
+            <Input
+              ref={skeyXRef}
+              label="Skew X"
+              unit="deg"
+              id="skeyX"
+              type="number"
+              name="skeyX"
+              placeholder="0"
+            />
+          </div>
+
+          <div className="input-control-group">
+            <Input
+              ref={skeyYRef}
+              label="Skew Y"
+              unit="deg"
+              id="rotate"
+              type="number"
+              name="skeyY"
               placeholder="0"
             />
           </div>
@@ -240,7 +282,7 @@ export const TransformFormControls = ({
               unit={transformUnits.transformOrigin}
               label="X"
               id="transform-origin-x-control"
-              type="text"
+              type="number"
               name="origin-x"
               placeholder="50"
             />
@@ -252,7 +294,7 @@ export const TransformFormControls = ({
               unit={transformUnits.transformOrigin}
               label="Y"
               id="transform-origin-y-control"
-              type="text"
+              type="number"
               name="origin-y"
               placeholder="50"
             />
