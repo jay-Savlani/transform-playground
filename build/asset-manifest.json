@@ -1,0 +1,14 @@
+{
+  "files": {
+    "main.css": "/transform-playground/static/css/main.da0de94c.css",
+    "main.js": "/transform-playground/static/js/main.8f279482.js",
+    "static/media/bumblebee-background": "/transform-playground/static/media/bumblebee-background.d0c46449e140ce759005",
+    "index.html": "/transform-playground/index.html",
+    "main.da0de94c.css.map": "/transform-playground/static/css/main.da0de94c.css.map",
+    "main.8f279482.js.map": "/transform-playground/static/js/main.8f279482.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.da0de94c.css",
+    "static/js/main.8f279482.js"
+  ]
+}
