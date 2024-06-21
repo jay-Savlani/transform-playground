@@ -10,7 +10,7 @@ export const TranslateView = ({
   return (
     <div className="translate-view">
       <div className="translate-view-cords">0, 0</div>
-      {showXYCords && (
+      {!showSpinner && showXYCords && (
         <div
           className="show-xycords"
           key={controlBoxStyle}

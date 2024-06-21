@@ -69,8 +69,9 @@ export const TransformFormControls = ({
 
     showXYCords &&
       setXYLocationCords({
-        x: xRef.current.value,
-        y: yRef.current.value,
+        x: xRef.current.value || 0,
+        y: yRef.current.value || 0,
+        unit: transformUnits.transform
       });
 
     handleApply(
@@ -119,8 +120,9 @@ export const TransformFormControls = ({
   const handleLocateXYClick = () => {
     setShowXYCords((prev) => !prev);
     setXYLocationCords({
-      x: xRef.current.value,
-      y: yRef.current.value,
+      x: xRef.current.value || 0,
+      y: yRef.current.value || 0,
+      unit: transformUnits.transform
     });
   };
 
@@ -184,7 +186,17 @@ export const TransformFormControls = ({
           <div className="transform-units-container">
             <UnitControls
               radioGroupName="transform"
-              onChange={handleUnitChange}
+              onChange={(e, identifer) => {
+                 handleUnitChange(e, identifer); 
+                 if(identifer === 'transform') {
+                   const {value } = e.target; 
+                   showXYCords && setXYLocationCords({
+                     x: xRef.current.value || 0,
+                     y: yRef.current.value || 0, 
+                     unit: value 
+                   })
+                 }
+              }}
               value={transformUnits.transform}
             />
           </div>

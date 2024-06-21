@@ -5,7 +5,7 @@ import { TranslateView } from "./components/TranslateView";
 import { useMediaQuery } from "./components/hooks/useMediaQuery";
 
 export default function App() {
-  const [xyLocationCords, setXYLocationCords] = useState({ x: 0, y: 0 });
+  const [xyLocationCords, setXYLocationCords] = useState({ x: 0, y: 0, unit: 'px' });
   const [showSpinner, setShowSpinner] = useState(false);
   const [controlBoxStyle, setControlBoxStyle] = useState({});
   const [controlBoxAngleReferenceStyle, setControlBoxAngleReferenceStyle] =
@@ -14,12 +14,25 @@ export default function App() {
 
   const { windowSize } = useMediaQuery();
 
-  console.log("window size", windowSize);
 
-  const xyLocationCordsStyle = {
-    left: `${xyLocationCords.x - 6}px`,
-    top: `${xyLocationCords.y - 6}px`,
-  };
+  let xyLocationCordsStyle = {};
+
+  if(xyLocationCords.unit === '%') {
+    let topPosition = ((150*xyLocationCords.y)/100).toFixed(0); 
+    let leftPosition = ((150*xyLocationCords.x)/100).toFixed(0);
+
+    xyLocationCordsStyle = {
+      left: `calc(${leftPosition}px - 6px)`,
+      top: `calc(${topPosition}px - 6px)`
+    }
+  }
+  else {
+    xyLocationCordsStyle = {
+       left: `calc(${xyLocationCords.x}${xyLocationCords.unit} - 6px)`,
+       top: `calc(${xyLocationCords.y}${xyLocationCords.unit} - 6px)`
+    }
+  }
+
 
   const handleApply = (transformValues, transformUnits) => {
     const { x, y, skeyX, skeyY, rotate, originX, originY } = transformValues;
