@@ -71,7 +71,7 @@ export const TransformFormControls = ({
       setXYLocationCords({
         x: xRef.current.value || 0,
         y: yRef.current.value || 0,
-        unit: transformUnits.transform
+        unit: transformUnits.transform,
       });
 
     handleApply(
@@ -122,7 +122,7 @@ export const TransformFormControls = ({
     setXYLocationCords({
       x: xRef.current.value || 0,
       y: yRef.current.value || 0,
-      unit: transformUnits.transform
+      unit: transformUnits.transform,
     });
   };
 
@@ -187,15 +187,16 @@ export const TransformFormControls = ({
             <UnitControls
               radioGroupName="transform"
               onChange={(e, identifer) => {
-                 handleUnitChange(e, identifer); 
-                 if(identifer === 'transform') {
-                   const {value } = e.target; 
-                   showXYCords && setXYLocationCords({
-                     x: xRef.current.value || 0,
-                     y: yRef.current.value || 0, 
-                     unit: value 
-                   })
-                 }
+                handleUnitChange(e, identifer);
+                if (identifer === "transform") {
+                  const { value } = e.target;
+                  showXYCords &&
+                    setXYLocationCords({
+                      x: xRef.current.value || 0,
+                      y: yRef.current.value || 0,
+                      unit: value,
+                    });
+                }
               }}
               value={transformUnits.transform}
             />
@@ -334,7 +335,10 @@ export const TransformFormControls = ({
           ref={audioRef}
           volume={0.5}
         >
-          <source src="/transformation-3-100340.mp3" type="audio/mpeg" />
+          <source
+            src="/transform-playground/transformation-3-100340.mp3"
+            type="audio/mpeg"
+          />
           Your browser does not support the audio tag.
         </audio>
       )}
